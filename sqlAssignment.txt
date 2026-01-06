@@ -1,0 +1,164 @@
+1. Display all employee records.
+     select * from employees;
+2. Display only employee ID, name, and department.
+     select emp_id, emp_name, department
+     from employees;
+3. Display employee name and salary for all employees.
+     select emp_name, salary
+     from employees;
+4. Display employees whose salary is greater than 40,000.
+     select *
+     from employees
+     where salary > 40000;
+5. Display employees whose salary is less than or equal to 35,000.
+     select *
+     from employees
+     where salary <= 35000;
+6. Display employees whose salary is exactly 45,000.
+     select * from employees where salary = 45000;
+7. Display employees who joined after 01-Jan-2022.
+     select * from employees where joining_date > '01-JAN-2022';
+8. Display employees who joined before 01-Jan-2021.
+     select * from employees where joining_date < '01-JAN-2021';
+9. Display employees whose salary is between 35,000 and 50,000.
+     select * from employees where salary between 35000 and 50000;
+10. Display employees whose salary is not between 30,000 and 45,000.
+      select * from employees where salary not between 30000 and 45000;
+11. Display employees whose joining date is between 01-Jan-2021 and 31-Dec-2022.
+      select *
+      from employees
+      where joining_date between '01-jan-2021' and '31-dec-2022';
+12. Display employees working in IT or HR departments.
+      select *
+      from employees
+      where department in ('IT', 'HR');
+13. Display employees working in Chennai, Bangalore, or Hyderabad.
+      select *
+      from employees
+      where location in  ('Chennai', 'Bangalore', 'Hyderabad');
+14. Display employees whose salary is IN (32000, 38000, 40000).
+      select *
+      from employees
+      where salary in (32000, 38000, 40000);
+15. Display employees not working in Mumbai.
+      select *
+      from employees
+      where location != 'Mumbai';
+16. Display employees whose department is not in IT and HR.
+      select *
+      from employees
+      where department not in ('IT', 'HR');
+17. Display employees whose designation is not in Developer and Tester.
+      select *
+      from employees
+      where designation not in ('Developer', 'Tester');
+18. Display employees whose salary is NULL.
+      select *
+      from employees
+      where salary is null;
+19. Display employees whose email is NULL.
+      select *
+      from employees
+      where email_id is null;
+20. Display employees whose salary is NOT NULL.
+      select *
+      from employees
+      where salary is not null;
+21. Display employees whose email is NOT NULL.
+      select *
+      from employees
+      where email_id is not null;
+22. Display employees whose name ends with ‘i’.
+      select *
+      from employees
+      where emp_name like '%i';
+23. Display employees whose name contains ‘vi’.
+     select *
+     from employees
+     where emp_name like '%vi%';
+24. Display employees whose email contains ‘@company.com’.
+     select *
+     from employees
+     where email_id like '%@company.com';
+25. Display employees whose designation ends with ‘Engineer’.
+      select *
+      from employees
+      where designation like '%Engineer';
+26. Display all employees ordered by salary ascending.
+      select *
+      from employees
+      order by salary asc;
+27. Display employees ordered by department ASC and salary DESC.
+      select *
+      from employees
+      order by department asc, salary desc;
+28. Display employees ordered by location ASC and employee name ASC.
+      select *
+      from employees
+      order by location asc, emp_name asc;
+29. Display employees working in IT department AND salary > 45,000.
+     select *
+     from employees
+     where department = 'IT' and salary > 45000;
+30. Display employees working in HR OR Sales department.
+      select *
+      from employees
+      where department in ('HR', 'Sales');
+31. Update salary to 50,000 for employees whose salary is NULL.
+      update Employees
+      set salary = 50000
+      where salary is null;
+32. Increase salary by 5,000 for all IT employees.
+     update employees
+     set salary = salary + 5000
+     where department = 'IT';
+33. Display employees having the same name more than once.
+     select emp_name
+     from employees
+     group by emp_name
+     having count(*) > 1;
+34. Display employees having the same salary.
+      select salary
+      from employees
+      group by salary
+      having count(*) > 1;
+35. Display employees working in the same department and same location.
+      select department, location
+      from employees
+      group by department, location
+      having count(*) > 1;
+36. Update location to Hyderabad for employees working in HR.
+     update employees
+     set location = 'Hyderabad'
+     where department = 'HR';
+37. Display employees NOT working in IT department.
+     select *
+     from employees
+     where department != 'IT';  
+38. Display employees working in IT AND located in Chennai.
+     select *
+     from employees
+     where department != 'IT';
+39. Display employees ordered by salary DESC and joining date ASC.
+     select *
+     from employees
+     order by salary desc, joining_date asc;
+40. Display all employees ordered by salary descending.
+     select *
+     from employees
+     order by salary desc;
+41. Display all employees ordered by joining date ascending. 
+     select *
+     from employees
+     order by joining_date asc;
+42. Display all employees ordered by employee name alphabetically.
+     select *
+     from employees
+     order by emp_name asc;
+
+
+
+
+
+
+
