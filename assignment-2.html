@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 2px;
+        }
+
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h3>Display all student names in an HTML unordered list</h3>
+            <ul id="name-list"></ul>
+        </div>
+        <div>
+            <h3>Display only students who scored more than 60 marks.</h3>
+            <ul id="students-list"></ul>
+        </div>
+        <div>
+            <h3>Count how many students belong to each department.</h3>
+            <ul id="dept-list"></ul>
+        </div>
+        <div>
+            <h3>Find the student with the highest marks.</h3>
+            <ul id="highest-mark-list"></ul>
+        </div>
+        <div>
+            <h3>Display students in a table with columns: Name, Marks, Department.</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Marks</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody id="student-table-body"></tbody>
+            </table>
+        </div>
+        <div>
+            <h3>Calculate the average marks of all students.</h3>
+            <p id="avg-mark"></p>
+        </div>
+        <div>
+            <h3>Display only CSE students in HTML.</h3>
+            <ul id="cse-list"></ul>
+        </div>
+        <div>
+            <h3>Sort students by marks in descending order.</h3>
+            <ul id="sort-marks"></ul>
+        </div>
+        <div>
+            <h3>Add a new student object and update the HTML list.</h3>
+            <ul id="new-list"></ul>
+        </div>
+        <div>
+            <h3>Highlight students who failed (marks < 50) in red color.</h3>
+            <ul id="highlight-list"></ul>
+        </div>
+    </div>
+    <script>
+        const students = [
+            { id: 1, name: "Amit", marks: 78, department: "CSE" },
+            { id: 2, name: "Priya", marks: 92, department: "ECE" },
+            { id: 3, name: "Rahul", marks: 45, department: "MECH" },
+            { id: 4, name: "Sneha", marks: 66, department: "CSE" },
+            { id: 5, name: "Kiran", marks: 88, department: "ECE" },
+            { id: 6, name: "Neha", marks: 74, department: "CSE" },
+            { id: 7, name: "Arjun", marks: 49, department: "MECH" },
+            { id: 8, name: "Pooja", marks: 91, department: "ECE" },
+            { id: 9, name: "Rohan", marks: 82, department: "CSE" },
+            { id: 10, name: "Anjali", marks: 47, department: "MECH" }
+        ];
+
+        const nameList = () => {
+            const ulList = document.getElementById("name-list");
+            students.forEach((stu) => {
+                const namesList = document.createElement("li");
+                namesList.textContent = stu.name;
+                ulList.appendChild(namesList);
+            });
+        }
+        const studentsRec = () => {
+            const stuList = students.filter((stu) => stu.marks > 60);
+            const ulStudList = document.getElementById("students-list")
+            stuList.forEach((list) => {
+                const valList = document.createElement("li");
+                valList.textContent = `Name: ${list.name},  Marks: ${list.marks},  Dept: ${list.department}`;
+                ulStudList.appendChild(valList);
+            });
+        }
+        const studentDeptCount = () => {
+            const countDept = students.reduce((a, stu) => {
+                a[stu.department] = (a[stu.department] || 0) + 1;
+                return a
+            }, {});
+            const ulDeptList = document.getElementById("dept-list");
+            for (let dept in countDept) {
+                const deptList = document.createElement("li");
+                deptList.textContent = `Dept: ${dept} Count: ${countDept[dept]}`;
+                ulDeptList.appendChild(deptList);
+            }
+        }
+        const highestMark = () => {
+            let highest = 0;
+            students.forEach((stu) => {
+                if (stu.marks > highest) {
+                    highest = stu.marks
+                }
+            });
+            const ulListMark = document.getElementById("highest-mark-list");
+            const highestStudentMark = students.find((stud) => stud.marks === highest);
+            const markList = document.createElement("li");
+            markList.textContent = `Name: ${highestStudentMark.name}  Dept: ${highestStudentMark.department}  Mark: ${highestStudentMark.marks}`
+            ulListMark.appendChild(markList);
+        }
+        const studentsTable = () => {
+            const tableBody = document.getElementById("student-table-body");
+            students.forEach((student) => {
+                const studentRow = document.createElement("tr");
+                const nameData = document.createElement("td");
+                nameData.textContent = student.name;
+                const markData = document.createElement("td");
+                markData.textContent = student.marks;
+                const deptData = document.createElement("td");
+                deptData.textContent = student.department;
+
+                studentRow.appendChild(nameData);
+                studentRow.appendChild(markData);
+                studentRow.appendChild(deptData);
+
+                tableBody.appendChild(studentRow);
+            });
+        }
+        const studentsAverageMark = () => {
+            const avgMark = document.getElementById("avg-mark");
+            const total = students.reduce((a, stduent) => a + stduent.marks, 0);
+            const average = total / students.length;
+            avgMark.textContent = `Average: ${average}`;
+        }
+        const studentsCSE = () => {
+            const ulListCSE = document.getElementById("cse-list");
+            const cseStudents = students.filter((student) => {
+                return student.department === "CSE"
+            });
+            cseStudents.forEach((student) => {
+                const studentList = document.createElement("li");
+                studentList.textContent = `Name: ${student.name}, Mark: ${student.marks}, Dept: ${student.department}`;
+                ulListCSE.appendChild(studentList);
+            });
+        }
+        const sortMarks = () => {
+            const ulSortMarks = document.getElementById("sort-marks");
+            const sortStudents = [...students].sort((a, b) => {
+                return b.marks - a.marks
+            });
+            sortStudents.forEach((student) => {
+                const sortList = document.createElement("li");
+                sortList.textContent = `Name: ${student.name}, Mark: ${student.marks}, Dept: ${student.department}`;
+                ulSortMarks.appendChild(sortList);
+            });
+        }
+        const newStudentsList = () => {
+            const ulNewList = document.getElementById("new-list");
+            students.push({
+                id: 11,
+                name: "Gowri",
+                marks: 85,
+                department: "ECE"
+            });
+            students.forEach((student) => {
+                const newList = document.createElement("li");
+                newList.textContent = `Name: ${student.name}, Mark: ${student.marks}, Dept: ${student.department}`;
+                ulNewList.appendChild(newList);
+            });
+        }
+        const highlightText = () => {
+            const ulHighlightList = document.getElementById("highlight-list");
+            students.forEach((list) => {
+                const highlightList = document.createElement("li");
+                highlightList.textContent = `Name: ${list.name}, Mark: ${list.marks}, Dept: ${list.department}`;
+                if(list.marks < 50){
+                    highlightList.style.color = "red";
+                }
+                ulHighlightList.appendChild(highlightList);
+            })
+        }
+
+        nameList();
+        studentsRec();
+        studentDeptCount();
+        highestMark();
+        studentsTable();
+        studentsAverageMark();
+        studentsCSE();
+        sortMarks();
+        newStudentsList();
+        highlightText();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            background-color: teal;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            font-family: monospace;
+            margin-bottom: 20px;
+        }
+
+        .todo-header {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .todo-heading {
+            color: black;
+            font-size: 18px;
+            font-family: monospace;
+        }
+
+        .div-container {
+            display: grid;
+            width: 500px;
+            background-color: white;
+            padding: 20px;
+            min-height: 100px;
+            border-radius: 20px;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        #add-item-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background-color: teal;
+            color: white;
+            font-size: 20px;
+            margin-top: 16px;
+        }
+
+        .add-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-item-field {
+            display: none;
+            flex-grow: 1;
+            height: 32px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-family: monospace;
+        }
+
+        .add-todo {
+            display: none;
+            height: 32px;
+            padding: 4px 8px;
+            margin-top: 4px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-family: monospace;
+            font-size: 15px;
+        }
+
+        h3 {
+            color: black;
+            font-size: 18px;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        #view-todo {
+            padding-left: 0;
+            margin-top: 8px;
+        }
+
+        #view-todo li {
+            list-style: none;
+            background: #f4f4f4;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Daily Todo-List</h2>
+    <div class="div-container">
+        <div class="todo-header">
+            <p class="todo-heading">Tasks Made Simple, Just by one click -></p>
+            <button id="add-item-btn" onclick="handleAddButton()">+</button>
+        </div>
+        <div class="add-controls">
+            <input type="text" id="add-item-field" class="add-item-field" placeholder="Enter a task">
+            <button type="button" id="add-todo" class="add-todo" onclick="handleAddTodoItems()">Add todo</button>
+        </div>
+    </div>
+    <div class="div-container" id="todo-list-card" style="display: none;">
+        <h3 id="view-todo-heading"></h3>
+        <ul id="view-todo"></ul>
+    </div>
+</body>
+<script>
+    const arr = [];
+    function handleAddButton() {
+        document.getElementById("add-item-field").style.display = "block";
+        document.getElementById("add-todo").style.display = "block";
+        document.getElementById("add-item-btn").style.display = "none";
+    }
+    function handleAddTodoItems() {
+        const item = document.getElementById("add-item-field");
+        const todo = item.value;
+        if (!todo) {
+            alert("Add a todo item");
+            return;
+        }
+        arr.push(todo);
+        item.value = "";
+        retrieveList();
+    }
+    function retrieveList() {
+        let ulElement = document.getElementById("view-todo");
+        const listElement = document.createElement("li");
+        listElement.textContent = arr[arr.length - 1];
+        ulElement.appendChild(listElement);
+        document.getElementById("todo-list-card").style.display = "grid";
+        document.getElementById("view-todo-heading").textContent = "Things To Do";
+    }
+
+</script>
+
+</html>
